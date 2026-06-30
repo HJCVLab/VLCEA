@@ -90,7 +90,7 @@ j3010_2.sm,47
 ...
 ```
 
-For J30, the `bks` column stores the BKS/OPT reference. For J60, J90, and J120, this repository keeps the same column name for code compatibility, but the values store PSPLIB heuristic reference solution (HRS) makespans for code compatibility makespans rather than proven optima. In publications, report these larger-set metrics as `RPD to HRS` and `HRS-or-better rate`, not as optimality gaps.
+For J30, the `bks` column stores the BKS/OPT reference. For J60, J90, and J120, this repository keeps the same column name for code compatibility, but the values store PSPLIB heuristic reference solution (HRS) makespans for code compatibility rather than proven optima. In publications, report these larger-set metrics as `RPD to HRS` and `HRS-or-better rate`, not as optimality gaps.
 
 ## Step 1: Generate validated constraints
 
