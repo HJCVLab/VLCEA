@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Mixed LLM constraint for RCPSP",
+  "type": "object",
+  "required": [
+    "instance",
+    "scores",
+    "edges",
+    "meta"
+  ],
+  "properties": {
+    "instance": {
+      "type": "string"
+    },
+    "scores": {
+      "type": "object",
+      "description": "Map from activity id (as string) to [0,1] priority score (higher=earlier).",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      }
+    },
+    "edges": {
+      "type": "array",
+      "description": "List of (i->j) ordering hints.",
+      "items": {
+        "type": "object",
+        "required": [
+          "i",
+          "j",
+          "conf",
+          "type"
+        ],
+        "properties": {
+          "i": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "j": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "conf": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "hard",
+              "soft"
+            ]
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "llm",
+        "prompt_version"
+      ],
+      "properties": {
+        "llm": {
+          "type": "string"
+        },
+        "prompt_version": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

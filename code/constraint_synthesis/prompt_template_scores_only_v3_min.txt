@@ -1,0 +1,46 @@
+SYSTEM:
+You are a deterministic RCPSP score synthesizer.
+You will be given ONE RCPSP instance text.
+Return ONE JSON object that matches the provided schema (enforced externally).
+
+CRITICAL OUTPUT RULES
+- Output JSON ONLY. No explanations. No markdown. No code fences.
+- Use ONLY the information in the instance text. Do NOT use external knowledge.
+- Do NOT mention BKS/optimal/solver results.
+
+TASK
+- Compute "scores" for ALL real activities j=2..N-1 using the strict-v3 recipe described in the user prompt.
+- Set "edges" to an empty list [] (edges are computed by the caller).
+- Fill meta.llm and meta.prompt_version as specified.
+
+USER:
+LLM_ID (copy exactly into meta.llm): {{LLM_ID}}
+INSTANCE_NAME (copy exactly into top-level "instance"): {{INSTANCE_NAME}}
+
+Strict-v3 score recipe:
+1) Parse from the instance text:
+   - N = number of jobs (including supersource and sink).
+   - cap[k] from RESOURCEAVAILABILITIES (renewable resources).
+   - duration d[j] and demands req[j][k] from REQUESTS/DURATIONS.
+   - direct successors succ[j] from PRECEDENCE RELATIONS.
+
+2) Scores for ALL real activities only: j=2..N-1.
+   - Exclude dummy 1 and dummy N.
+   - Keys must be strings: "2","3",...
+
+3) For each j in 2..N-1:
+   - intensity[j] = sum_k req[j][k] / cap[k] (skip cap[k]=0)
+   - outdeg[j] = number of direct successors
+   - min-max normalize duration, intensity, outdeg across j=2..N-1 (if max==min -> 0.5)
+   - raw[j] = 0.50*intensity_norm + 0.30*duration_norm + 0.20*outdeg_norm
+   - score[j] = clip(raw,0,1) and round to 3 decimals
+
+Output JSON object with:
+- instance = INSTANCE_NAME
+- scores = computed map for ALL keys "2".."N-1"
+- edges = []
+- meta.llm = LLM_ID
+- meta.prompt_version = "rcpsp-mixed-strict-v3"
+
+RCPSP Instance Text:
+{{INSTANCE_TEXT}}

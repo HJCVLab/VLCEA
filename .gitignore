@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+.conda/
+
+# Experiment outputs
+results/*
+!results/.gitkeep
+generated_constraints/
+rerun_results*/
+agg_results*/
+runtime*/
+
+# Raw benchmark data and large local files
+data/*/instances/
+data/*/*.zip
+*.sm
+*.bas
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
