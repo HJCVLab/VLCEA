@@ -2,6 +2,10 @@
 
 **VLCEA: LLM-Guided Evolutionary Scheduling for RCPSP via Validated, Hallucination-Safe Constraints**
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21093804.svg)](https://doi.org/10.5281/zenodo.21093804)
+[![License: PolyForm NC](https://img.shields.io/badge/License-PolyForm%20NC%201.0.0-blue)](https://polyformproject.org/licenses/noncommercial/1.0.0/)
+[![Data: CC BY-NC 4.0](https://img.shields.io/badge/Data-CC%20BY--NC%204.0-lightgrey)](https://creativecommons.org/licenses/by-nc/4.0/)
+
 This repository contains the public implementation of VLCEA, a framework that uses a Large Language Model (LLM) to synthesize validated, instance-grounded guidance for evolutionary scheduling on the Resource-Constrained Project Scheduling Problem (RCPSP).
 
 VLCEA uses the LLM only to generate activity-level priority scores. Ordering hints are then constructed deterministically from direct precedence relations already present in the instance, preventing hallucinated precedence constraints by design. The validated guidance is injected into a permutation-based evolutionary algorithm with an SSGS decoder through repair-level, decoder-level, and fitness-level mechanisms.
